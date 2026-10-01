@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+
+<h1>@ViewData["Title"]</h1>
+<p>privacy</p>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>phone no</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        @{
+            if(ViewBag.stud!=null)
+            {
+                foreach(var Student in ViewBag.stud)
+                    {
+        
+        <tr>
+            <td>@Student.Name</td>
+            <td>@Student.Address</td>
+            <td>@Student.Phone_no</td>
+            <td>@Student.Email</td>
+        </tr>
+                    }
+            }
+        }
+    </tbody>
+</table>

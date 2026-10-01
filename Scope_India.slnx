@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Scope_India.DAL/Scope_India.DAL.csproj" />
+  <Project Path="Scope_India.DATA/Scope_India.DATA.csproj" />
+  <Project Path="Scope_India/Scope_India.csproj" />
+</Solution>

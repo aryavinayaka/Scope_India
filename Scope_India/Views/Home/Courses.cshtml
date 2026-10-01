@@ -1,0 +1,30 @@
+﻿@model List<Scope_India.DAL.Course>
+
+@{
+    ViewData["Title"] = "Courses";
+}
+
+<h2>Our Courses</h2>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row">
+        @foreach (var course in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@course.Name</h5>
+                        <p class="card-text">@course.Description</p>
+                        <p><strong>Duration:</strong> @course.Duration</p>
+                        <p><strong>Fee:</strong> ₹@course.Fee</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No courses available at the moment.</p>
+}
