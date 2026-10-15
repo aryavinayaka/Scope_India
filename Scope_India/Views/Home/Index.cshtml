@@ -6,7 +6,7 @@
 
 <!-- HERO -->
 <section id="home" class="position-relative" style="min-height: 90vh; overflow:hidden;">
-    <img src="~/images/hero image.jpg.jpeg" alt="Scope India"
+    <img src="~/images/hero-image.jpg" alt="Scope India"
          class="position-absolute top-0 start-0 w-100 h-100"
          style="object-fit:cover; z-index:0;" />
 
@@ -81,8 +81,11 @@
                     <div class="col-6 col-md-4 col-lg-2">
                         <div class="bg-white rounded p-3 h-100 shadow-sm text-center">
                             <i class="bi @icon fs-3" style="color:#1a3d7c;"></i>
-                            <p class="fw-bold small mt-2 mb-2">@course.Name</p>
-                            <a href="#" class="d-inline-block rounded-circle" style="width:28px; height:28px; background-color:#f0f0f0; line-height:28px;">
+                            <a asp-controller="Home" asp-action="CourseDetails" asp-route-id="@course.Id" class="text-decoration-none">
+                                <p class="fw-bold small mt-2 mb-2" style="color:#333;">@course.Name</p>
+                            </a>
+                            <a asp-controller="Home" asp-action="CourseDetails" asp-route-id="@course.Id"
+                               class="d-inline-block rounded-circle" style="width:28px; height:28px; background-color:#f0f0f0; line-height:28px;">
                                 <i class="bi bi-arrow-right small" style="color:#1a3d7c;"></i>
                             </a>
                         </div>
@@ -265,7 +268,31 @@
     }
 </section>
 
-<!-- CTA -->
+<!-- CAREERS -->
+<section id="careers" class="py-5" style="background-color:#f8f9fa;">
+    <div class="container">
+        <h2 class="text-center mb-4" style="color:#1a3d7c;">Careers</h2>
+        <p class="text-center mx-auto mb-4" style="max-width:700px;">
+            Join our team, or explore the career paths our graduates go on to build.
+        </p>
+        <div class="row text-center">
+            <div class="col-md-4 mb-3">
+                <h5 style="color:#1a3d7c;">Full Stack Developer</h5>
+                <p class="text-muted small">Build modern web applications end to end.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h5 style="color:#1a3d7c;">Data Analyst</h5>
+                <p class="text-muted small">Turn raw data into actionable business insights.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h5 style="color:#1a3d7c;">Cloud Engineer</h5>
+                <p class="text-muted small">Design and manage scalable cloud infrastructure.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA / CONTACT -->
 <section id="contact" class="py-5" style="background-color:#1a3d7c; color:white;">
     <div class="container d-flex justify-content-between align-items-center flex-wrap gy-3">
         <div>

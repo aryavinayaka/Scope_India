@@ -25,31 +25,17 @@ namespace Scope_India.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Courses()
+        public async Task<IActionResult> CourseDetails(int id)
         {
-            var courses = await _courseRepo.GetAllAsync();
-            return View(courses);
+            var course = await _courseRepo.GetByIdAsync(id);
+            if (course == null) return NotFound();
+
+            return View(course);
         }
 
-        public IActionResult About()
-        {
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        public IActionResult Privacy() => View();
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View();
-        }
+        public IActionResult Error() => View();
     }
 }
