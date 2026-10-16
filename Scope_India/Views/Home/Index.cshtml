@@ -29,6 +29,51 @@
     </div>
 </section>
 
+
+
+
+<!-- CERTIFICATIONS -->
+<section class="py-5" style="background-color:#f8f9fa;">
+    <div class="container">
+        <div class="row align-items-center mb-4">
+            <div class="col-md-6">
+                <h4 style="color:#1a3d7c;">— Get Globally Certified from SCOPE INDIA</h4>
+            </div>
+            <div class="col-md-6">
+                <p class="text-muted small mb-0">Gain in-demand skills with globally recognised certifications and take your career anywhere in the world.</p>
+            </div>
+        </div>
+        <div class="row g-3 text-center">
+            @{
+                var partners = new (string Name, string FileName)[]
+                {
+                    ("Microsoft", "microsoft.jpeg"),
+                    ("IBM", "ibm.jpeg"),
+                    ("Google", "google.jpeg"),
+                    ("Amazon", "amazon.jpeg"),
+                    ("Red Hat", "redhat.jpeg"),
+                    ("ISTQB", "istqb.jpeg"),
+                    ("Cisco", "cisco.jpeg"),
+                    ("GitHub", "github.jpeg")
+                };
+            }
+            @foreach (var partner in partners)
+            {
+                <div class="col-6 col-md-3">
+                    <div class="bg-white rounded shadow-sm d-flex align-items-center justify-content-center" style="height:100px;">
+                        <img src="~/images/@partner.FileName"
+                             alt="@partner.Name" style="max-height:60px; max-width:90%; object-fit:contain;" />
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+
+
+
 <!-- STATS BAR -->
 <section class="py-4 border-bottom">
     <div class="container">
@@ -57,36 +102,59 @@
     </div>
 </section>
 
+
+
 <!-- COURSES -->
-<section id="courses" class="py-5" style="background-color:#f8f9fa;">
+<section id="courses" class="py-5">
     <div class="container">
-        <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap">
+        <div class="d-flex justify-content-between align-items-start mb-4 flex-wrap">
             <div>
-                <p class="text-uppercase small fw-bold mb-1" style="color:#d4a017;">— Our Courses</p>
-                <h2 style="color:#1a3d7c;">Industry-Relevant Courses for a Better Tomorrow</h2>
+                <p class="text-uppercase small fw-bold mb-2" style="color:#e8622c; letter-spacing:1px;">— Our Courses</p>
+                <h2 class="fw-bold mb-1" style="color:#1a1a2e;">Popular Courses</h2>
+                <p class="text-muted mb-0">Choose from our industry-focused programs to build a successful career.</p>
             </div>
-            <a href="#courses" class="fw-bold text-decoration-none" style="color:#1a3d7c;">View All Courses →</a>
+            <a href="#courses" class="btn btn-outline-primary rounded-pill px-3 fw-semibold" style="border-color:#1a3d7c; color:#1a3d7c;">
+                View All Courses →
+            </a>
         </div>
 
-        <div class="row g-3">
+        <div class="row g-4">
             @{
-                var icons = new[] { "bi-cpu", "bi-code-slash", "bi-graph-up-arrow", "bi-clipboard-check", "bi-bar-chart-line", "bi-hdd-stack", "bi-infinity", "bi-cloud", "bi-diagram-3", "bi-phone", "bi-megaphone", "bi-pencil-square" };
+                var cardStyles = new (string Bg, string IconBg, string AccentColor, string Icon)[]
+                {
+                    ("#eef3ff", "#4361ee", "#4361ee", "bi-calendar3"),
+                    ("#fdeeea", "#e8622c", "#e8622c", "bi-infinity"),
+                    ("#eafaf1", "#2ecc71", "#2ecc71", "bi-graph-up-arrow"),
+                    ("#f3eefc", "#8e44ad", "#8e44ad", "bi-cloud")
+                };
             }
             @if (Model.Courses != null && Model.Courses.Any())
             {
                 @for (int i = 0; i < Model.Courses.Count; i++)
                 {
                     var course = Model.Courses[i];
-                    var icon = icons[i % icons.Length];
-                    <div class="col-6 col-md-4 col-lg-2">
-                        <div class="bg-white rounded p-3 h-100 shadow-sm text-center">
-                            <i class="bi @icon fs-3" style="color:#1a3d7c;"></i>
-                            <a asp-controller="Home" asp-action="CourseDetails" asp-route-id="@course.Id" class="text-decoration-none">
-                                <p class="fw-bold small mt-2 mb-2" style="color:#333;">@course.Name</p>
-                            </a>
+                    var style = cardStyles[i % cardStyles.Length];
+                    <div class="col-md-6 col-lg-3">
+                        <div class="rounded-4 p-4 h-100 position-relative" style="background-color:@style.Bg; overflow:hidden;">
+                            <i class="bi @style.Icon position-absolute"
+                               style="font-size:5rem; opacity:0.08; bottom:-10px; right:-10px; color:@style.AccentColor;"></i>
+
+                            <div class="rounded-3 d-flex align-items-center justify-content-center mb-3"
+                                 style="width:48px; height:48px; background-color:@style.IconBg;">
+                                <i class="bi @style.Icon text-white fs-5"></i>
+                            </div>
+
+                            <h5 class="fw-bold mb-2" style="color:#1a1a2e;">@course.Name</h5>
+                            <p class="text-muted small mb-4">@course.Description</p>
+
                             <a asp-controller="Home" asp-action="CourseDetails" asp-route-id="@course.Id"
-                               class="d-inline-block rounded-circle" style="width:28px; height:28px; background-color:#f0f0f0; line-height:28px;">
-                                <i class="bi bi-arrow-right small" style="color:#1a3d7c;"></i>
+                               class="d-flex align-items-center text-decoration-none fw-semibold position-relative"
+                               style="color:@style.AccentColor; z-index:1;">
+                                Explore Course
+                                <span class="rounded-circle d-flex align-items-center justify-content-center ms-2"
+                                      style="width:28px; height:28px; background-color:@style.AccentColor;">
+                                    <i class="bi bi-arrow-right text-white small"></i>
+                                </span>
                             </a>
                         </div>
                     </div>
@@ -99,6 +167,7 @@
         </div>
     </div>
 </section>
+
 
 <!-- WHY CHOOSE US -->
 <section id="why-us" class="py-5" style="background-color:#1a3d7c; color:white;">
@@ -147,6 +216,182 @@
     </div>
 </section>
 
+
+
+
+<!-- PLACEMENT HIGHLIGHTS -->
+<section id="placements" class="py-4" style="background-color:#1a3d7c; color:white;">
+    <div class="container">
+        <p class="text-uppercase small fw-bold mb-3" style="color:#d4a017;">— Placement Highlights</p>
+        <div class="row text-center g-3">
+            <div class="col-6 col-md-3">
+                <i class="bi bi-briefcase fs-3" style="color:#d4a017;"></i>
+                <h5 class="fw-bold mt-2 mb-0">100%</h5>
+                <small class="text-white-50">Placement Support</small>
+            </div>
+            <div class="col-6 col-md-3">
+                <i class="bi bi-people fs-3" style="color:#d4a017;"></i>
+                <h5 class="fw-bold mt-2 mb-0">1,000+</h5>
+                <small class="text-white-50">Students Placed</small>
+            </div>
+            <div class="col-6 col-md-3">
+                <i class="bi bi-bar-chart fs-3" style="color:#d4a017;"></i>
+                <h5 class="fw-bold mt-2 mb-0">Top Companies</h5>
+                <small class="text-white-50">Recruit Our Students</small>
+            </div>
+            <div class="col-6 col-md-3">
+                <i class="bi bi-star fs-3" style="color:#d4a017;"></i>
+                <h5 class="fw-bold mt-2 mb-0">Successful</h5>
+                <small class="text-white-50">Career Transitions</small>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="container py-5">
+    <div class="d-flex justify-content-between align-items-start mb-4 flex-wrap">
+        <div>
+            <p class="text-uppercase small fw-bold mb-1" style="color:#e8622c;">— Testimonials</p>
+            <h2 class="fw-bold" style="color:#1a1a2e;">Success Stories That Inspire</h2>
+        </div>
+        <div>
+            <button id="testiPrev" class="btn btn-light rounded-circle me-2" style="width:38px; height:38px;">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+            <button id="testiNext" class="btn btn-light rounded-circle" style="width:38px; height:38px;">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    @if (Model.Testimonials != null && Model.Testimonials.Any())
+    {
+        <div class="row g-3 align-items-stretch">
+            <div class="col-lg-6">
+                <div id="testiList" class="d-flex flex-column justify-content-between h-100"></div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="rounded-4 p-3 h-100" style="background:#eef3ff;">
+                    <div id="testiFeatured"></div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+<script>
+    const testimonials = [
+        @foreach (var t in Model.Testimonials)
+        {
+                @:{ name: "@t.StudentName", role: "@t.Role", company: "@t.Company", course: "@t.CourseTaken", message: "@Html.Raw(t.Message.Replace("\"", "\\\""))", photo: "@t.PhotoPath", rating: @t.Rating },
+        }
+    ];
+
+    let currentTesti = 0;
+
+    function renderList(startIndex) {
+        const listContainer = document.getElementById('testiList');
+        listContainer.innerHTML = '';
+
+        for (let i = 0; i < 2; i++) {
+            const idx = (startIndex + i) % testimonials.length;
+            const t = testimonials[idx];
+            const stars = '★'.repeat(t.rating) + '☆'.repeat(5 - t.rating);
+
+            const item = document.createElement('div');
+            item.className = 'testi-item bg-white rounded-3 shadow-sm p-3 mb-2 d-flex';
+            item.style.cursor = 'pointer';
+            item.dataset.index = idx;
+            item.innerHTML = `
+                <i class="bi bi-quote fs-5 me-2" style="color:#4361ee;"></i>
+                <div class="flex-grow-1">
+                    <p class="mb-1 small">${t.message}</p>
+                    <div class="text-warning small mb-1">${stars}</div>
+                    <h6 class="fw-bold mb-0 small">${t.name}</h6>
+                    <small class="text-muted" style="font-size:0.75rem;">${t.course}${t.company ? ' · ' + t.company : ''}</small>
+                </div>
+            `;
+            item.addEventListener('click', () => {
+                currentTesti = idx;
+                renderFeatured(currentTesti);
+                renderList(currentTesti);
+            });
+            listContainer.appendChild(item);
+        }
+    }
+
+    function renderFeatured(index) {
+        const t = testimonials[index];
+        const container = document.getElementById('testiFeatured');
+        container.innerHTML = `
+            <h5 class="fw-bold mb-2" style="color:#1a1a2e;">${t.name}</h5>
+            <div style="width:32px; height:2px; background:#4361ee; margin-bottom:10px;"></div>
+            <img src="${t.photo || '/images/testimonials/default.jpg'}" alt="${t.name}"
+                 class="rounded-3 mb-2" style="width:100%; max-width:140px; height:140px; object-fit:cover;" />
+            <div class="d-flex align-items-center mb-2">
+                <div class="rounded-circle d-flex align-items-center justify-content-center me-2"
+                     style="width:28px; height:28px; background:white;">
+                    <i class="bi bi-briefcase small" style="color:#4361ee;"></i>
+                </div>
+                <div>
+                    <div class="fw-bold small">${t.role || ''}</div>
+                    <small class="text-muted" style="font-size:0.75rem;">${t.company || ''}</small>
+                </div>
+            </div>
+            <i class="bi bi-quote fs-5" style="color:#4361ee;"></i>
+            <p class="mt-1 small mb-0">${t.message}</p>
+        `;
+    }
+
+    document.getElementById('testiPrev').addEventListener('click', () => {
+        currentTesti = (currentTesti - 1 + testimonials.length) % testimonials.length;
+        renderFeatured(currentTesti);
+        renderList(currentTesti);
+    });
+
+    document.getElementById('testiNext').addEventListener('click', () => {
+        currentTesti = (currentTesti + 1) % testimonials.length;
+        renderFeatured(currentTesti);
+        renderList(currentTesti);
+    });
+
+    if (testimonials.length > 0) {
+        renderFeatured(0);
+        renderList(0);
+    }
+</script>
+
+
+<!-- CAREERS -->
+<section id="careers" class="py-5" style="background-color:#f8f9fa;">
+    <div class="container">
+        <h2 class="text-center mb-4" style="color:#1a3d7c;">Careers</h2>
+        <p class="text-center mx-auto mb-4" style="max-width:700px;">
+            Join our team, or explore the career paths our graduates go on to build.
+        </p>
+        <div class="row text-center">
+            <div class="col-md-4 mb-3">
+                <h5 style="color:#1a3d7c;">Full Stack Developer</h5>
+                <p class="text-muted small">Build modern web applications end to end.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h5 style="color:#1a3d7c;">Data Analyst</h5>
+                <p class="text-muted small">Turn raw data into actionable business insights.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h5 style="color:#1a3d7c;">Cloud Engineer</h5>
+                <p class="text-muted small">Design and manage scalable cloud infrastructure.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
 <!-- MISSION / VISION (ABOUT) -->
 <section id="about" class="container py-5">
     <div class="row g-5">
@@ -180,117 +425,7 @@
     </div>
 </section>
 
-<!-- CERTIFICATIONS -->
-<section class="py-5" style="background-color:#f8f9fa;">
-    <div class="container">
-        <div class="row align-items-center mb-4">
-            <div class="col-md-6">
-                <h4 style="color:#1a3d7c;">— Get Globally Certified from SCOPE INDIA</h4>
-            </div>
-            <div class="col-md-6">
-                <p class="text-muted small mb-0">Gain in-demand skills with globally recognised certifications and take your career anywhere in the world.</p>
-            </div>
-        </div>
-        <div class="row g-3 text-center">
-            @foreach (var partner in new[] { "Microsoft", "IBM", "Google", "Amazon", "Red Hat", "ISTQB", "Cisco", "GitHub" })
-            {
-                <div class="col-6 col-md-3">
-                    <div class="bg-white rounded p-3 shadow-sm fw-bold" style="color:#333;">@partner</div>
-                </div>
-            }
-        </div>
-    </div>
-</section>
 
-<!-- PLACEMENT HIGHLIGHTS -->
-<section id="placements" class="py-4" style="background-color:#1a3d7c; color:white;">
-    <div class="container">
-        <p class="text-uppercase small fw-bold mb-3" style="color:#d4a017;">— Placement Highlights</p>
-        <div class="row text-center g-3">
-            <div class="col-6 col-md-3">
-                <i class="bi bi-briefcase fs-3" style="color:#d4a017;"></i>
-                <h5 class="fw-bold mt-2 mb-0">100%</h5>
-                <small class="text-white-50">Placement Support</small>
-            </div>
-            <div class="col-6 col-md-3">
-                <i class="bi bi-people fs-3" style="color:#d4a017;"></i>
-                <h5 class="fw-bold mt-2 mb-0">1,000+</h5>
-                <small class="text-white-50">Students Placed</small>
-            </div>
-            <div class="col-6 col-md-3">
-                <i class="bi bi-bar-chart fs-3" style="color:#d4a017;"></i>
-                <h5 class="fw-bold mt-2 mb-0">Top Companies</h5>
-                <small class="text-white-50">Recruit Our Students</small>
-            </div>
-            <div class="col-6 col-md-3">
-                <i class="bi bi-star fs-3" style="color:#d4a017;"></i>
-                <h5 class="fw-bold mt-2 mb-0">Successful</h5>
-                <small class="text-white-50">Career Transitions</small>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials" class="container py-5">
-    <p class="text-uppercase small fw-bold mb-1" style="color:#d4a017;">— Testimonials</p>
-    <h2 class="mb-4" style="color:#1a3d7c;">Success Stories That Inspire</h2>
-
-    @if (Model.Testimonials != null && Model.Testimonials.Any())
-    {
-        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                @for (int i = 0; i < Model.Testimonials.Count; i++)
-                {
-                    var t = Model.Testimonials[i];
-                    <div class="carousel-item @(i == 0 ? "active" : "")">
-                        <div class="bg-white rounded shadow-sm p-4 mx-auto" style="max-width:700px;">
-                            <i class="bi bi-quote fs-2" style="color:#d4a017;"></i>
-                            <p class="fst-italic">@t.Message</p>
-                            <div class="d-flex align-items-center mt-3">
-                                <div class="rounded-circle bg-light me-3" style="width:45px; height:45px;"></div>
-                                <div>
-                                    <h6 class="fw-bold mb-0">@t.StudentName</h6>
-                                    <small class="text-muted">@t.CourseTaken</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev" style="width:5%;">
-                <span class="carousel-control-prev-icon" style="filter:invert(1) grayscale(100%) brightness(0.3);"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next" style="width:5%;">
-                <span class="carousel-control-next-icon" style="filter:invert(1) grayscale(100%) brightness(0.3);"></span>
-            </button>
-        </div>
-    }
-</section>
-
-<!-- CAREERS -->
-<section id="careers" class="py-5" style="background-color:#f8f9fa;">
-    <div class="container">
-        <h2 class="text-center mb-4" style="color:#1a3d7c;">Careers</h2>
-        <p class="text-center mx-auto mb-4" style="max-width:700px;">
-            Join our team, or explore the career paths our graduates go on to build.
-        </p>
-        <div class="row text-center">
-            <div class="col-md-4 mb-3">
-                <h5 style="color:#1a3d7c;">Full Stack Developer</h5>
-                <p class="text-muted small">Build modern web applications end to end.</p>
-            </div>
-            <div class="col-md-4 mb-3">
-                <h5 style="color:#1a3d7c;">Data Analyst</h5>
-                <p class="text-muted small">Turn raw data into actionable business insights.</p>
-            </div>
-            <div class="col-md-4 mb-3">
-                <h5 style="color:#1a3d7c;">Cloud Engineer</h5>
-                <p class="text-muted small">Design and manage scalable cloud infrastructure.</p>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- CTA / CONTACT -->
 <section id="contact" class="py-5" style="background-color:#1a3d7c; color:white;">
